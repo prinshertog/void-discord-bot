@@ -51,9 +51,6 @@ client.on(Events.InteractionCreate, async interaction => {
           >  - /wanted add        - Add a user to the wanted list
           >  - /wanted remove     - Remove a user from the wanted list
           >  - /wanted show       - Show wanted players
-          > 
-          > **Debug:**
-          > Variable: ${process.env.DB_NAME}
         `)
     }
 
