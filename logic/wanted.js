@@ -18,7 +18,7 @@ export async function getAllWanted(interaction) {
             await interaction.reply(responseString);
         }
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }
 
@@ -38,7 +38,7 @@ export async function createWanted(
         );
         interaction.reply("User **" + knownAs + "** is added to wanted list!");
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }
 
@@ -50,6 +50,6 @@ export async function deleteWanted(
         await deleteWantedDB(knownAs);
         interaction.reply("User **" + knownAs + "** removed from wanted list!");
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }

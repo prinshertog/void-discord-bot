@@ -18,7 +18,7 @@ export async function getAllMembers(interaction) {
             await interaction.reply(responseString);
         }
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }
 
@@ -38,7 +38,7 @@ export async function createMember(
             rank);
         interaction.reply("User added **" + knownAs + "** successfully!");
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }
 
@@ -50,7 +50,7 @@ export async function deleteMember(
         await deleteMemberDB(knownAs);
         interaction.reply("User **" + knownAs + "** was deleted!");
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }
 
@@ -65,7 +65,7 @@ export async function getMemberByDiscordId (
         }
         await interaction.reply(`Your standing is: **${member.standing}**`);
     } catch (error) {
-        interaction.reply("Error: " + error);
+        interaction.reply(`${error}`);
     }
 }
 
@@ -82,6 +82,6 @@ export async function updateStanding(
         }
         interaction.reply("Standing for user **" + knownAs + "** was updated to **" + member.standing + "**!");
     } catch (error) {
-        interaction.reply("Error " + error);
+        interaction.reply(`${error}`);
     }
 }
