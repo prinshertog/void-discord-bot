@@ -51,7 +51,7 @@ export async function deleteMemberDB(knownAs) {
 export async function getMemberByDiscordIdDB(discordId) {
     try {
         const data = await collection.findOne({discordId: discordId});
-        if (data == null) {
+        if (typeof data === 'undefined') {
             throw new Error("No data found.");
         }
         return data;
@@ -63,7 +63,7 @@ export async function getMemberByDiscordIdDB(discordId) {
 export async function getMemberByKnownAsDB(knownAs) {
     try {
         const data = await collection.findOne({knownAs: knownAs});
-        if (data == null) {
+        if (typeof data === 'undefined') {
             throw new Error("No data found.");
         }
         return data;
