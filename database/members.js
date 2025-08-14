@@ -50,11 +50,7 @@ export async function deleteMemberDB(knownAs) {
 
 export async function getMemberByDiscordIdDB(discordId) {
     try {
-        const data = await collection.findOne({discordId: discordId});
-        if (!data) {
-            throw new Error("No data found.");
-        }
-        return data;
+        return await collection.findOne({discordId: discordId});
     } catch (error) {
         return error;
     }
@@ -62,11 +58,7 @@ export async function getMemberByDiscordIdDB(discordId) {
 
 export async function getMemberByKnownAsDB(knownAs) {
     try {
-        const data = await collection.findOne({knownAs: knownAs});
-        if (!data) {
-            throw new Error("No data found.");
-        }
-        return data;
+        return await collection.findOne({knownAs: knownAs});
     } catch (error) {
         return error;
     }

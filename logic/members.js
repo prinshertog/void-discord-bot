@@ -61,10 +61,9 @@ export async function getMemberByDiscordId (
     try {
         const member = await getMemberByDiscordIdDB(knownAs);
         if (member === null) {
-            await interaction.reply("No standing found!");
-        } else {
-            await interaction.reply(`Your standing is: **${member.standing}**`);
+            throw new Error("No standing found!")
         }
+        await interaction.reply(`Your standing is: **${member.standing}**`);
     } catch (error) {
         interaction.reply("Error: " + error);
     }
@@ -78,6 +77,9 @@ export async function updateStanding(
     try {
         await updateStandingDB(knownAs, standing);
         const member = await getMemberByKnownAsDB(knownAs);
+        if (member === null) {
+            throw new Error("This user does not exist!");
+        }
         interaction.reply("Standing for user **" + knownAs + "** was updated to **" + member.standing + "**!");
     } catch (error) {
         interaction.reply("Error " + error);
