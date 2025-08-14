@@ -1,17 +1,13 @@
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
-const { DB_USER, DB_PASS, DB_URL, DB_PORT } = process.env;
+const { CONN_STR, DB_NAME } = process.env;
 
-const dbName = "bot-db";
-const collectionName = "wanted";
-
-
-const uri = `mongodb://${DB_USER}:${DB_PASS}@${DB_URL}:${DB_PORT}/${dbName}?authSource=admin`;
-const client = new MongoClient(uri);
+const client = new MongoClient(CONN_STR);
 await client.connect();
 
-const db = client.db(dbName);
+const collectionName = "wanted";
+const db = client.db(DB_NAME);
 const collection = db.collection(collectionName);
 
 export async function getAllWantedDB() {

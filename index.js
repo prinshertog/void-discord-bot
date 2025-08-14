@@ -15,13 +15,19 @@ const client = new Client({ intents: [
 ] });
 
 client.on(Events.ClientReady, readyClient => {
-  console.log(`Logged in as ${readyClient.user.tag}!`);
+  console.log(`Logged in as ${readyClient.user.tag}!`); 
 });
 
 client.on(Events.InteractionCreate, async interaction => {
   try {
     if (!interaction.isChatInputCommand()) return;
     const member = interaction.member;
+    const knownAs = interaction.options.getString("knownas");
+    const discordId = interaction.options.getString("discordid");
+    const robloxId = interaction.options.getString("robloxid");
+    const standing = interaction.options.getInteger("standing");
+    const rank = interaction.options.getString("rank");
+    const bounty = interaction.options.getInteger("bounty");
 
     if (interaction.commandName === 'standing') {
       await getMemberByDiscordId(interaction, member.id);
@@ -45,6 +51,9 @@ client.on(Events.InteractionCreate, async interaction => {
           >  - /wanted add        - Add a user to the wanted list
           >  - /wanted remove     - Remove a user from the wanted list
           >  - /wanted show       - Show wanted players
+          > 
+          > **Debug:**
+          > Variable: ${process.env.DB_NAME}
         `)
     }
 
@@ -57,11 +66,6 @@ client.on(Events.InteractionCreate, async interaction => {
         await getAllMembers(interaction);
 
       } else if (interaction.options.getSubcommand() === 'add') {
-        const knownAs = interaction.options.getString("knownas");
-        const discordId = interaction.options.getString("discordid");
-        const robloxId = interaction.options.getString("robloxid");
-        const standing = interaction.options.getInteger("standing");
-        const rank = interaction.options.getString("rank");
         await createMember(interaction, 
           knownAs, 
           discordId, 
@@ -71,11 +75,8 @@ client.on(Events.InteractionCreate, async interaction => {
         );
 
       } else if (interaction.options.getSubcommand() === 'remove') {
-        const knownAs = interaction.options.getString("knownas");
         await deleteMember(interaction, knownAs);
       } else if (interaction.options.getSubcommand() === 'updatestanding') {
-        const standing = interaction.options.getInteger("standing");
-        const knownAs = interaction.options.getString("knownas");
         await updateStanding(interaction, knownAs, standing);
       }
     }
@@ -89,10 +90,6 @@ client.on(Events.InteractionCreate, async interaction => {
         await getAllWanted(interaction);
 
       } else if (interaction.options.getSubcommand() === 'add') {
-        const knownAs = interaction.options.getString("knownas");
-        const discordId = interaction.options.getString("discordid");
-        const robloxId = interaction.options.getString("robloxid");
-        const bounty = interaction.options.getInteger("bounty");
         await createWanted(interaction, 
           knownAs, 
           discordId, 
@@ -101,9 +98,7 @@ client.on(Events.InteractionCreate, async interaction => {
         );
 
       } else if (interaction.options.getSubcommand() === 'remove') {
-        const knownAs = interaction.options.getString("knownas");
         await deleteWanted(interaction, knownAs);
-
       }
     }
 
