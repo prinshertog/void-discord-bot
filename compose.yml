@@ -1,9 +1,6 @@
 services:
   void-bot:
-    #image: prinshertog/void-bot
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: prinshertog/discord-void-bot
     environment:
       - CONN_STR=mongodb://user:pass@mongodb:27017
       - TOKEN=
