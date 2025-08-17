@@ -36,7 +36,7 @@ export async function createMember(
             robloxId, 
             standing, 
             rank);
-        interaction.reply("User added **" + knownAs + "** successfully!");
+        interaction.reply("User **" + knownAs + "** added successfully!");
     } catch (error) {
         interaction.reply(`${error}`);
     }
